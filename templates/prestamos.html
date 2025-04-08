@@ -1,0 +1,12 @@
+<h2>Préstamos</h2>
+<form method="post" action="/prestamo">
+  <input name="usuario_id" placeholder="ID Usuario" required>
+  <input name="copia_id" placeholder="ID Copia" required>
+  <button type="submit">Agregar</button>
+</form>
+<ul>
+  {% for p in prestamos %}
+    <li>Préstamo ID: {{ p._id }} | Usuario: {{ p.usuario_id }} | Copia: {{ p.copia_id }}</li>
+  {% endfor %}
+</ul>
+<a href="/">Volver</a>
