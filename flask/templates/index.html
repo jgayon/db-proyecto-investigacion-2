@@ -6,6 +6,33 @@
 {% block content %}
     <div class="text-center">
         <h1>Bienvenido al Sistema de Biblioteca</h1>
-        <p>Utiliza el menú superior para navegar por las secciones del sistema.</p>
+        <p>Utiliza el menú para navegar por las secciones del sistema.</p>
+    </div>
+
+    <!-- Menú de navegación -->
+    <div class="text-center mt-4">
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                <a href="{{ url_for('autores.listar_autores') }}" class="btn btn-primary">Autores</a>
+            </li>
+            <li class="list-inline-item">
+                <a href="{{ url_for('libros.listar_libros') }}" class="btn btn-primary">Libros</a>
+            </li>
+            <li class="list-inline-item">
+                <a href="{{ url_for('ediciones.listar_ediciones') }}" class="btn btn-primary">Ediciones</a>
+            </li>
+            <li class="list-inline-item">
+                <a href="{{ url_for('copias.listar_copias') }}" class="btn btn-primary">Copias</a>
+            </li>
+            <li class="list-inline-item">
+                <a href="{{ url_for('usuarios.listar_usuarios') }}" class="btn btn-primary">Usuarios</a>
+            </li>
+            <li class="list-inline-item">
+                <a href="{{ url_for('prestamos.listar_prestamos') }}" class="btn btn-primary">Préstamos</a>
+            </li>
+            <li class="list-inline-item">
+                <a href="{{ url_for('consultas.menu_consultas') }}" class="btn btn-primary">Consultas</a>
+            </li>
+        </ul>
     </div>
 {% endblock %}

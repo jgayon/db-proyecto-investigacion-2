@@ -1,40 +1,29 @@
-{% extends 'base.html' %}
+<!-- templates/prestamos/listar.html -->
+{% extends "base.html" %}
+
+{% block title %}Listado de Préstamos{% endblock %}
+
 {% block content %}
-<div class="container mt-4">
     <h2>Lista de Préstamos</h2>
-    <a href="{{ url_for('prestamos.crear_prestamo') }}" class="btn btn-success mb-3">Nuevo Préstamo</a>
-    <table class="table table-bordered table-striped">
+    <a href="{{ url_for('prestamos.crear_prestamo') }}" class="btn btn-success mb-3">Crear Nuevo Préstamo</a>
+    <table class="table">
         <thead>
             <tr>
                 <th>Usuario</th>
-                <th>Libro</th>
-                <th>Edición</th>
                 <th>Copia</th>
-                <th>Fecha Préstamo</th>
-                <th>Fecha Devolución</th>
-                <th>Acciones</th>
+                <th>Fecha de Préstamo</th>
+                <th>Fecha de Devolución</th>
             </tr>
         </thead>
         <tbody>
             {% for prestamo in prestamos %}
-                {% set usuario = usuarios[prestamo.usuario_id] %}
-                {% set copia = copias[prestamo.copia_id] %}
-                {% set edicion = ediciones[copia.edicion_id] %}
-                {% set libro = libros[edicion.libro_id] %}
-                <tr>
-                    <td>{{ usuario.nombre }} ({{ usuario.rut }})</td>
-                    <td>{{ libro.titulo }}</td>
-                    <td>{{ edicion.isbn }} - {{ edicion.anio }} - {{ edicion.idioma }}</td>
-                    <td>Copia #{{ copia.numero }}</td>
-                    <td>{{ prestamo.fecha_prestamo }}</td>
-                    <td>{{ prestamo.fecha_devolucion }}</td>
-                    <td>
-                        <a href="{{ url_for('prestamos.editar_prestamo', id=prestamo._id) }}" class="btn btn-warning btn-sm">Editar</a>
-                        <a href="{{ url_for('prestamos.eliminar_prestamo', id=prestamo._id) }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este préstamo?')">Eliminar</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>{{ prestamo.usuario['nombre'] if prestamo.usuario else 'Desconocido' }}</td>
+                <td>{{ prestamo.copia['numero'] if prestamo.copia else 'Desconocido' }}</td>
+                <td>{{ prestamo.fecha_prestamo }}</td>
+                <td>{{ prestamo.fecha_devolucion }}</td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>
-</div>
 {% endblock %}

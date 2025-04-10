@@ -1,37 +1,41 @@
-{% extends 'base.html' %}
+<!-- templates/prestamos/crear.html -->
+{% extends "base.html" %}
+
+{% block title %}Crear Préstamo{% endblock %}
+
 {% block content %}
-<div class="container mt-4">
-    <h2>Registrar Préstamo</h2>
+    <h2>Crear Nuevo Préstamo</h2>
     <form method="POST">
-        <div class="mb-3">
-            <label class="form-label">Usuario</label>
-            <select name="usuario_id" class="form-select" required>
+        <div class="form-group">
+            <label for="usuario_id">Usuario</label>
+            <select name="usuario_id" id="usuario_id" class="form-control" required>
+                <option value="">Selecciona un usuario</option>
                 {% for usuario in usuarios %}
-                    <option value="{{ usuario._id }}">{{ usuario.nombre }} ({{ usuario.rut }})</option>
+                    <option value="{{ usuario._id }}">{{ usuario.nombre }}</option>
                 {% endfor %}
             </select>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Copia Disponible</label>
-            <select name="copia_id" class="form-select" required>
+        
+        <div class="form-group">
+            <label for="copia_id">Copia</label>
+            <select name="copia_id" id="copia_id" class="form-control" required>
+                <option value="">Selecciona una copia</option>
                 {% for copia in copias %}
-                    {% set edicion = ediciones[copia.edicion_id] %}
-                    {% set libro = libros[edicion.libro_id] %}
-                    <option value="{{ copia._id }}">
-                        {{ libro.titulo }} - Copia #{{ copia.numero }} ({{ edicion.isbn }})
-                    </option>
+                    <option value="{{ copia._id }}">{{ copia.numero }}</option>
                 {% endfor %}
             </select>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Fecha Préstamo</label>
-            <input type="date" name="fecha_prestamo" class="form-control" required>
+
+        <div class="form-group">
+            <label for="fecha_prestamo">Fecha de Préstamo</label>
+            <input type="date" name="fecha_prestamo" id="fecha_prestamo" class="form-control" required>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Fecha Devolución</label>
-            <input type="date" name="fecha_devolucion" class="form-control" required>
+
+        <div class="form-group">
+            <label for="fecha_devolucion">Fecha de Devolución</label>
+            <input type="date" name="fecha_devolucion" id="fecha_devolucion" class="form-control" required>
         </div>
-        <button type="submit" class="btn btn-primary">Registrar</button>
+
+        <button type="submit" class="btn btn-primary">Crear Préstamo</button>
     </form>
-</div>
 {% endblock %}
