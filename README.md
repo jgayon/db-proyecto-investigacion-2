@@ -3,7 +3,7 @@ Software de Desarrollo y driver para conectarse Base de datos No Relacional Mong
 
 Este proyecto es una aplicación para gestionar una base de datos No Relacional en MongoDB, implementando operaciones CRUD para las entidades de una biblioteca, como autores, libros, usuarios, etc. Que pertenecen a un modelo entidad-relación dado.
 
-![Modelo Entidad-Relación](\db-proyecto-investigacion-2\Modelo_Entidad-Relacion.png)
+![Modelo Entidad-Relación](Modelo_Entidad-Relacion.png)
 
 ## Objetivos
 * Implementación y programación de un modelo de datos No relacional como resultado de requerimientos de un negocio.
