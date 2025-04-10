@@ -1,76 +1,44 @@
-from flask import Flask, request, jsonify, render_template, redirect, url_for
-from flask_pymongo import PyMongo
-from bson import ObjectId
-from datetime import datetime
+# app.py
+import customtkinter as ctk
+from autores import crear_tab_autores
+from consultas import crear_tab_consultas
+from copias import crear_tab_copias
+from libros import crear_tab_libros
+from ediciones import crear_tab_ediciones
+from prestamos import crear_tab_prestamos
+from usuarios import crear_tab_usuarios
 
-app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://mongo:27017/biblioteca"
-mongo = PyMongo(app)
 
-def serialize_doc(doc):
-    doc["_id"] = str(doc["_id"])
-    return doc
+ctk.set_appearance_mode("System")
+ctk.set_default_color_theme("blue")
 
-# --- RUTAS PRINCIPALES ---
-@app.route("/")
-def index():
-    return render_template("index.html")
+root = ctk.CTk()
+root.title("Sistema de Biblioteca")
+root.geometry("900x600")
 
-@app.route("/autores")
-def ver_autores():
-    autores = list(mongo.db.autores.find())
-    return render_template("autores.html", autores=autores)
+notebook = ctk.CTkTabview(master=root, width=900, height=580)
+notebook.pack(padx=20, pady=20, fill="both", expand=True)
 
-@app.route("/libros")
-def ver_libros():
-    libros = list(mongo.db.libros.find())
-    return render_template("libros.html", libros=libros)
+# Crear pestañas
+tab_autores = notebook.add("Autores")
+crear_tab_autores(tab_autores)
 
-@app.route("/usuarios")
-def ver_usuarios():
-    usuarios = list(mongo.db.usuarios.find())
-    return render_template("usuarios.html", usuarios=usuarios)
+tab_libros = notebook.add("Libros")
+crear_tab_libros(tab_libros)
 
-@app.route("/prestamos")
-def ver_prestamos():
-    prestamos = list(mongo.db.prestamos.find())
-    return render_template("prestamos.html", prestamos=prestamos)
+tab_edicion = notebook.add("Ediciones")
+crear_tab_ediciones(tab_edicion)
 
-# --- CRUD AUTOR ---
-@app.route("/autor", methods=["POST"])
-def crear_autor():
-    nombre = request.form["nombre"]
-    mongo.db.autores.insert_one({"nombre": nombre})
-    return redirect(url_for("ver_autores"))
+tab_copias = notebook.add("Copias")
+crear_tab_copias(tab_copias)
 
-# --- CRUD LIBRO ---
-@app.route("/libro", methods=["POST"])
-def crear_libro():
-    titulo = request.form["titulo"]
-    autor_id = ObjectId(request.form["autor_id"])
-    mongo.db.libros.insert_one({"titulo": titulo, "autor_id": autor_id})
-    return redirect(url_for("ver_libros"))
+tab_usuarios = notebook.add("Usuarios")
+crear_tab_usuarios(tab_usuarios)
 
-# --- CRUD USUARIO ---
-@app.route("/usuario", methods=["POST"])
-def crear_usuario():
-    nombre = request.form["nombre"]
-    rut = request.form["rut"]
-    mongo.db.usuarios.insert_one({"nombre": nombre, "RUT": rut})
-    return redirect(url_for("ver_usuarios"))
+tab_prestamos = notebook.add("Préstamos")
+crear_tab_prestamos(tab_prestamos)
 
-# --- CRUD PRESTAMO ---
-@app.route("/prestamo", methods=["POST"])
-def crear_prestamo():
-    usuario_id = ObjectId(request.form["usuario_id"])
-    copia_id = ObjectId(request.form["copia_id"])
-    fecha = datetime.now()
-    mongo.db.prestamos.insert_one({
-        "usuario_id": usuario_id,
-        "copia_id": copia_id,
-        "fecha_prestamo": fecha
-    })
-    return redirect(url_for("ver_prestamos"))
+tab_consultas = notebook.add("Consultas")
+crear_tab_consultas(tab_consultas)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+root.mainloop()
