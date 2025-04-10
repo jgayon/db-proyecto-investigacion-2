@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Usuarios</h2>
+    <a href="{{ url_for('usuarios.crear_usuario') }}" class="btn btn-success mb-3">Agregar Usuario</a>
+    <ul class="list-group">
+        {% for usuario in usuarios %}
+            <li class="list-group-item">
+                {{ usuario.nombre }} (RUT: {{ usuario.rut }})
+                <div class="float-end">
+                    <a href="{{ url_for('usuarios.editar_usuario', id=usuario._id) }}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{{ url_for('usuarios.eliminar_usuario', id=usuario._id) }}" class="btn btn-danger btn-sm">Eliminar</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

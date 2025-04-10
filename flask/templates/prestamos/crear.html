@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Registrar Préstamo</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label class="form-label">Usuario</label>
+            <select name="usuario_id" class="form-select" required>
+                {% for usuario in usuarios %}
+                    <option value="{{ usuario._id }}">{{ usuario.nombre }} ({{ usuario.rut }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Copia Disponible</label>
+            <select name="copia_id" class="form-select" required>
+                {% for copia in copias %}
+                    {% set edicion = ediciones[copia.edicion_id] %}
+                    {% set libro = libros[edicion.libro_id] %}
+                    <option value="{{ copia._id }}">
+                        {{ libro.titulo }} - Copia #{{ copia.numero }} ({{ edicion.isbn }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Fecha Préstamo</label>
+            <input type="date" name="fecha_prestamo" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Fecha Devolución</label>
+            <input type="date" name="fecha_devolucion" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar</button>
+    </form>
+</div>
+{% endblock %}

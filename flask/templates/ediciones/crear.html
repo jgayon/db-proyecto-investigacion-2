@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Agregar Edición</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="libro_id" class="form-label">Libro</label>
+            <select name="libro_id" class="form-select" required>
+                {% for libro in libros %}
+                    <option value="{{ libro._id }}">{{ libro.titulo }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">ISBN</label>
+            <input type="text" class="form-control" name="isbn" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Año</label>
+            <input type="number" class="form-control" name="anio" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Idioma</label>
+            <input type="text" class="form-control" name="idioma" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
+{% endblock %}

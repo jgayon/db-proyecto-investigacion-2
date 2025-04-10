@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Copias</h2>
+    <a href="{{ url_for('copias.crear_copia') }}" class="btn btn-success mb-3">Agregar Copia</a>
+    <ul class="list-group">
+        {% for copia in copias %}
+            <li class="list-group-item">
+                <strong>{{ ediciones[copia.edicion_id].libro }}</strong> (ISBN: {{ ediciones[copia.edicion_id].isbn }}) - Copia N°{{ copia.numero }}
+                <div class="float-end">
+                    <a href="{{ url_for('copias.editar_copia', id=copia._id) }}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{{ url_for('copias.eliminar_copia', id=copia._id) }}" class="btn btn-danger btn-sm">Eliminar</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

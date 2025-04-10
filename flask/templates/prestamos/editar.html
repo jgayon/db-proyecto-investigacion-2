@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Editar Préstamo</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label class="form-label">Usuario</label>
+            <select name="usuario_id" class="form-select" required>
+                {% for usuario in usuarios %}
+                    <option value="{{ usuario._id }}" {% if usuario._id == prestamo.usuario_id %}selected{% endif %}>
+                        {{ usuario.nombre }} ({{ usuario.rut }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Copia</label>
+            <select name="copia_id" class="form-select" required>
+                {% for copia in copias %}
+                    {% set edicion = ediciones[copia.edicion_id] %}
+                    {% set libro = libros[edicion.libro_id] %}
+                    <option value="{{ copia._id }}" {% if copia._id == prestamo.copia_id %}selected{% endif %}>
+                        {{ libro.titulo }} - Copia #{{ copia.numero }} ({{ edicion.isbn }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Fecha Préstamo</label>
+            <input type="date" name="fecha_prestamo" class="form-control" value="{{ prestamo.fecha_prestamo }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Fecha Devolución</label>
+            <input type="date" name="fecha_devolucion" class="form-control" value="{{ prestamo.fecha_devolucion }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Consultas</h2>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a href="{{ url_for('consultas.consulta1') }}">Consulta 1: Copias con información de libro, edición y autor</a>
+        </li>
+        <li class="list-group-item">
+            <a href="{{ url_for('consultas.consulta2') }}">Consulta 2: Libros prestados por un usuario</a>
+        </li>
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Crear Libro</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" name="titulo" required>
+        </div>
+        <div class="mb-3">
+            <label for="autor_id" class="form-label">Autor</label>
+            <select class="form-select" name="autor_id" required>
+                {% for autor in autores %}
+                <option value="{{ autor._id }}">{{ autor.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="{{ url_for('libros.listar_libros') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

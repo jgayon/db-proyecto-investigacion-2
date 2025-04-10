@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Editar Copia</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="edicion_id" class="form-label">Edición</label>
+            <select name="edicion_id" class="form-select" required>
+                {% for edicion in ediciones %}
+                    <option value="{{ edicion._id }}"
+                        {% if edicion._id == copia.edicion_id %}selected{% endif %}>
+                        {{ libros[edicion.libro_id] }} - ISBN: {{ edicion.isbn }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Número de Copia</label>
+            <input type="number" class="form-control" name="numero" value="{{ copia.numero }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+    </form>
+</div>
+{% endblock %}

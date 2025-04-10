@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Ediciones</h2>
+    <a href="{{ url_for('ediciones.crear_edicion') }}" class="btn btn-success mb-3">Agregar Edición</a>
+    <ul class="list-group">
+        {% for edicion in ediciones %}
+            <li class="list-group-item">
+                <strong>{{ libros[edicion.libro_id] }}</strong> - ISBN: {{ edicion.isbn }}, Año: {{ edicion.anio }}, Idioma: {{ edicion.idioma }}
+                <div class="float-end">
+                    <a href="{{ url_for('ediciones.editar_edicion', id=edicion._id) }}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{{ url_for('ediciones.eliminar_edicion', id=edicion._id) }}" class="btn btn-danger btn-sm">Eliminar</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

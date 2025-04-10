@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h3>Consulta 2: Libros prestados por un usuario</h3>
+    <form method="POST" class="mb-3">
+        <div class="form-group">
+            <label for="rut">Ingrese RUT del usuario:</label>
+            <input type="text" class="form-control" name="rut" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
+    {% if datos %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>ISBN</th>
+                <th>Fecha Préstamo</th>
+                <th>Fecha Devolución</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in datos %}
+            <tr>
+                <td>{{ item.titulo }}</td>
+                <td>{{ item.isbn }}</td>
+                <td>{{ item.fecha_prestamo }}</td>
+                <td>{{ item.fecha_devolucion }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endblock %}

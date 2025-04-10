@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h3>Consulta 1: Copias con información</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Autores</th>
+                <th>ISBN</th>
+                <th>Año</th>
+                <th>Idioma</th>
+                <th>Copia N°</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in datos %}
+            <tr>
+                <td>{{ item.titulo }}</td>
+                <td>{{ item.autores | join(', ') }}</td>
+                <td>{{ item.isbn }}</td>
+                <td>{{ item.anio }}</td>
+                <td>{{ item.idioma }}</td>
+                <td>{{ item.copia_numero }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Nuevo Autor{% endblock %}
+{% block content %}
+<h2>Crear Nuevo Autor</h2>
+<form method="POST">
+    <div class="mb-3">
+        <label class="form-label">Nombre del Autor:</label>
+        <input type="text" name="nombre" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{{ url_for('autores.listar_autores') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

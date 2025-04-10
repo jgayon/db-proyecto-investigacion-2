@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Editar Edición</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="libro_id" class="form-label">Libro</label>
+            <select name="libro_id" class="form-select" required>
+                {% for libro in libros %}
+                    <option value="{{ libro._id }}" {% if libro._id == edicion.libro_id %}selected{% endif %}>{{ libro.titulo }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">ISBN</label>
+            <input type="text" class="form-control" name="isbn" value="{{ edicion.isbn }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Año</label>
+            <input type="number" class="form-control" name="anio" value="{{ edicion.anio }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Idioma</label>
+            <input type="text" class="form-control" name="idioma" value="{{ edicion.idioma }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+    </form>
+</div>
+{% endblock %}
